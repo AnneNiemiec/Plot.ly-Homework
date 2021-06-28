@@ -1,8 +1,4 @@
-
-
-
 // Use d3.json() to fetch data from JSON file
-// Incoming data is internally referred to as incomingData
 function biodiversity(otu){
 d3.json("samples.json").then((incomingData) => {
   var sampleSet=incomingData.samples;
@@ -11,20 +7,32 @@ d3.json("samples.json").then((incomingData) => {
   };
   // Use filter() to pass the function as its argument
   var filteredButtons = incomingData.filter(filterbellyButtons);
+
     //console.log(incomingData);
     // console.log(filteredButtons)
-     // Create the data array for our plot
-   var data = [trace];
+   
+   var sampleInfo = filteredButtons[0]
 
-//   // Define the plot layout
+   // Grabbing data
+   var Coronado=sampleInfo.otu_ids;
+   var Beach=sampleInfo.sample_values;
+   var Sand=sampleInfo.otu_labels;
+   var Sun=Coronado.slice(0,10)
+  
+   // Define the plot layout
    var layout = {
-     title: "The highest critically acclaimed movies.",
      xaxis: { title: "Title" },
      yaxis: { title: "Metascore (Critic) Rating"}
    };
-
-//   // Plot the chart to a div tag with id "bar-plot"
-   Plotly.newPlot("bar-plot", data, layout);
+  // Create your trace.
+  var trace = {
+    x: Beach.slice(0,10),
+    y: Sun,
+    type: "bar", 
+    orientation:"h"
+  };
+   // Plot the chart 
+   Plotly.newPlot("bar", trace);
 });
 };
  
