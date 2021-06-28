@@ -37,13 +37,18 @@ d3.json("samples.json").then((incomingData) => {
 });
 };
 // Use d3.json() to fetch data from JSON file
-function bellies(otu){
+function bellies(){
     var umbrella=d3.select("#selDataset");
-    d3.json("samples.json").then((incomingData.names) => {
+    d3.json("samples.json").then((incomingData) => {
       var shovel=incomingData.names;
-      function filterbellyButtons(sample) {
-        return sample.id== otu;
-      };
-    })
-}
+
 //Append data
+shovel.forEach(element => {
+    umbrella.append('option').text(element).property("value");
+});
+biodiversity(shovel[0])
+
+});
+bellies()
+
+    }
