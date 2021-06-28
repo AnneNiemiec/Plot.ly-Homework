@@ -1,3 +1,17 @@
+// Metadata
+function metadata(otu){
+d3.json("samples.json").then((incomingData) => {
+  var sampleSet=incomingData.metadata;
+  function Demo(metadata) {
+    return metadata.id== otu;
+  };
+  // Use filter() to pass the function as its argument
+  var filteredDemo = sampleSet.filter(Demo);
+  var demoGraphics=filteredDemo[0]
+  var salt=d3.select("#sample-metadata");
+  salt.html("")
+  });
+}
 // Use d3.json() to fetch data from JSON file
 function biodiversity(otu){
 d3.json("samples.json").then((incomingData) => {
@@ -6,12 +20,13 @@ d3.json("samples.json").then((incomingData) => {
     return sample.id== otu;
   };
   // Use filter() to pass the function as its argument
-  var filteredButtons = incomingData.filter(filterbellyButtons);
+  var filteredButtons = sampleSet.filter(filterbellyButtons);
 
     //console.log(incomingData);
-    // console.log(filteredButtons)
+    console.log(filteredButtons);
    
-   var sampleInfo = filteredButtons[0]
+   var sampleInfo = filteredButtons[0];
+   console.log(sampleInfo);
 
    // Grabbing data
    var Coronado=sampleInfo.otu_ids;
@@ -21,19 +36,23 @@ d3.json("samples.json").then((incomingData) => {
   
    // Define the plot layout
    var layout = {
-     xaxis: { title: "Title" },
-     yaxis: { title: "Metascore (Critic) Rating"}
+     title: "bacteria"
+   // format here!!!
    };
+
   // Create your trace.
-  var trace = {
+  var trace = [{
     x: Beach.slice(0,10).reverse(),
     y: Sun,
     text: Sand.slice(0,10).reverse(),
     type: "bar", 
     orientation:"h"
-  };
-   // Plot the chart 
-   Plotly.newPlot("bar", trace);
+  }];
+   // Plot the bar chart 
+   Plotly.newPlot("bar", trace, layout);
+   console.log(Beach.slice(0,10).reverse());
+
+   // Plot bubble chart !!!
 });
 };
 // Use d3.json() to fetch data from JSON file
@@ -49,6 +68,11 @@ shovel.forEach(element => {
 biodiversity(shovel[0])
 
 });
-bellies()
+};
 
-    }
+// New function
+function optionChanged(fish){
+  biodiversity(fish)
+}
+bellies();
+
