@@ -38,7 +38,7 @@ d3.json("samples.json").then((incomingData) => {
    var Coronado=sampleInfo.otu_ids;
    var Beach=sampleInfo.sample_values;
    var Sand=sampleInfo.otu_labels;
-   var Sun=Coronado.slice(0,10).map(otu_id=>otu_id).reverse()
+   var Sun=Coronado.slice(0,10).map(otuId=>`OTU ${otuId}`).reverse();
   
    // Define the plot layout
    var layout = {
